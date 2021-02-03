@@ -1,0 +1,26 @@
+[
+    {
+        "model": "prestamos.genero",
+        "pk": 1,
+        "fields": {
+            "nombre": "Hombre",
+            "key": "hombre"
+        }
+    },
+    {
+        "model": "prestamos.genero",
+        "pk": 2,
+        "fields": {
+            "nombre": "Mujer",
+            "key": "mujer"
+        }
+    },
+    {
+        "model": "prestamos.genero",
+        "pk": 3,
+        "fields": {
+            "nombre": "Otro",
+            "key": "otro"
+        }
+    }
+]

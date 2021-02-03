@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  postgres_db:
+    image: postgres:11.5
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+        - POSTGRES_DB=moni_db
+        - POSTGRES_USER=moni_user
+        - POSTGRES_PASSWORD=moni_password
+    ports:
+        - 6543:5432
+
+  django:
+    build: .
+    volumes:
+      - static:/code/static
+      - .:/code
+    depends_on:
+      - postgres_db
+  
+  nginx:
+    image: nginx:1.13
+    ports:
+      - 8000:80
+    volumes:
+      - ./config/nginx/conf.d:/etc/nginx/conf.d
+      - static:/code/static
+    depends_on: 
+      - django
+
+volumes:
+  .:
+  postgres_data:
+  static:
