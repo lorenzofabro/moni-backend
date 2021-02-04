@@ -22,5 +22,33 @@
             "nombre": "Otro",
             "key": "otro"
         }
+    },
+    {
+        "model": "auth.group",
+        "pk": 1,
+        "fields": {
+            "name": "administrador",
+            "permissions": []
+        }
+    },
+    {
+        "model": "auth.user",
+        "pk": 1,
+        "fields": {
+          "password": "pbkdf2_sha256$150000$LRdHRewvkgbB$qXbs4Yl8LkiQzJ9grfwjMC2Y0nA1gzKUGyR1UhN00cE=",
+          "last_login": "2020-02-03T17:43:34.469Z",
+          "is_superuser": true,
+          "username": "admin",
+          "first_name": "Administrador",
+          "last_name": "Moni",
+          "email": "adminmoni@yopmail.com",
+          "is_staff": true,
+          "is_active": true,
+          "date_joined": "2020-02-03T17:43:34.469Z",
+          "groups": [
+            1
+          ],
+          "user_permissions": []
+        }
     }
 ]

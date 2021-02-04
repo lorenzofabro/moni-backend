@@ -1,6 +1,12 @@
 import math
 from rest_framework import serializers
-from .models import PedidoPrestamo
+from .models import PedidoPrestamo, Genero
+
+
+class GeneroSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Genero
+        fields = ['id', 'nombre', 'key']
 
 class PedidoPrestamoSerializer(serializers.ModelSerializer):
     def validate(self, attrs):

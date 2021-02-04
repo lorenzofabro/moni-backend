@@ -1,18 +1,15 @@
 import requests
 
-from django.http.response import Http404
-from django.shortcuts import render
-from django.http import JsonResponse
 from django.conf import settings
 
-from rest_framework import serializers, status, mixins, generics
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.parsers import JSONParser
-from rest_framework.views import APIView
+from rest_framework import mixins, generics
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from .models import PedidoPrestamo
-from .serializers import PedidoPrestamoSerializer
+from .permissions import IsPostOrIsAuthenticated
+
+from .models import Genero, PedidoPrestamo
+from .serializers import GeneroSerializer, PedidoPrestamoSerializer
+
 
 
 def validar_prestamo(dni: int):
@@ -29,10 +26,15 @@ def validar_prestamo(dni: int):
     except Exception as e:
         raise e
 
+class GeneroAPIView(generics.ListAPIView):
+    queryset = Genero.objects.all()
+    serializer_class = GeneroSerializer
+    permission_classes = (AllowAny, )
 
 class PedidoPrestamoAPIView(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = PedidoPrestamo.objects.all()
     serializer_class = PedidoPrestamoSerializer
+    permission_classes = (IsPostOrIsAuthenticated, )
     
     def post(self, request, *args, **kwargs):
         request.data["aprobado"] = validar_prestamo(request.data["dni"])
@@ -45,3 +47,4 @@ class PedidoPrestamoAPIView(mixins.ListModelMixin, mixins.CreateModelMixin, gene
 class PedidoPrestamoDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = PedidoPrestamo.objects.all()
     serializer_class = PedidoPrestamoSerializer
+    permission_class = [IsAuthenticated]
