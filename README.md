@@ -1,0 +1,7 @@
+- En el directorio *moni/moni/* copiar el archivo *.env.example*, creando uno nuevo llamando *.env* en el mismo directorio. Agregar la SECRET_KEY de Django y la key para la api de Moni.
+- En una terminal correr `docker-compose up`
+- Para aplicar los migrates y los datos iniciales, en el directorio raíz hay un archivo llamado `popular_db.sh`. Correrlo para aplicar los mismos.
+- La aplicación esta corriendo en *http://localhost:8000*.
+- Posee un usuario precargado de prueba el cual posee los siguientes datos:
+  - username: admin
+  - password: 12345
